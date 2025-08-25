@@ -355,7 +355,7 @@
         </div>
 
         <div class="actions">
-            <button class="btn btn-primary" onclick="copyToWhatsApp()">📋 Tempel ke WhatsApp</button>
+            <button class="btn btn-primary" onclick="copyToWhatsApp()">📋 Salin daftar belanja</button>
             <button class="btn btn-secondary" onclick="clearAll()">🗑️ Hapus Semua</button>
         </div>
     </div>
@@ -450,7 +450,7 @@
 
         function updateCounter() {
             const checkedItems = document.querySelectorAll('input[type="checkbox"]:checked').length;
-            document.getElementById('itemCount').textContent = `${checkedItems} item dipilih`;
+            document.getElementById('itemCount').textContent = `${checkedItems} barang dipilih`;
         }
 
         function showToast(message) {
