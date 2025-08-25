@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Belanja</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .category {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .category:last-child {
+            border-bottom: none;
+        }
+
+        .category-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .category-icon {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .items {
+            padding: 10px 20px 20px;
+        }
+
+        .item {
+            display: block;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .item.checked {
+            background-color: #e8f5e8;
+            border-radius: 8px;
+            margin: 5px 0;
+            padding: 12px 10px;
+        }
+        
+        .item.checked .item-name {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .item-main {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .item-main input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            accent-color: #4CAF50;
+            cursor: pointer;
+        }
+
+        .item-name {
+            flex: 1;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .item-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 35px;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            font-size: 12px;
+            flex-wrap: wrap;
+        }
+
+        .size-options label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            transition: all 0.2s;
+        }
+
+        .size-options label:hover {
+            background: #e9ecef;
+        }
+
+        .size-options input[type="radio"]:checked + span {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .size-options input[type="radio"] {
+            display: none;
+        }
+
+        .size-options span {
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .quantity-input {
+            width: 60px;
+            padding: 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .quantity-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .actions {
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-1px);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        .counter {
+            text-align: center;
+            padding: 10px 20px;
+            background: #e8f5e8;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .item.no-size .item-main {
+            margin-bottom: 0;
+            justify-content: space-between;
+        }
+
+        .notes-section {
+            border-bottom: 1px solid #f0f0f0;
+            background: #fafafa;
+        }
+
+        .notes-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .notes-content {
+            padding: 15px 20px;
+        }
+
+        .notes-content textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .notes-content textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .notes-content textarea::placeholder {
+            color: #999;
+        }
+
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #d32f2f;
+        }
+
+        .edit-link {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 10px;
+            margin: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #856404;
+        }
+
+        .edit-link a {
+            color: #495057;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛒 Daftar Belanja</h1>
+            <p>Checklist belanja untuk Mama</p>
+        </div>
+
+        <div class="counter">
+            <span id="itemCount">0 item dipilih</span>
+        </div>
+
+        <!-- Loading state -->
+        <div class="loading" id="loading">
+            Loading items...
+        </div>
+
+        <!-- Error state -->
+        <div class="error" id="error" style="display:none;">
+            Error loading items. Make sure items.json file exists.
+        </div>
+
+        <!-- Categories will be loaded here -->
+        <div id="categories-container"></div>
+
+        <!-- Notes Section -->
+        <div class="notes-section">
+            <div class="notes-header">
+                <span class="category-icon">📝</span>
+                Tambahan / Notes
+            </div>
+            <div class="notes-content">
+                <textarea id="additional-notes" placeholder="Tulis catatan atau item tambahan di sini..." rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- Edit Instructions -->
+        <div class="edit-link">
+            💡 <strong>Tip:</strong> To update items, edit the <a href="items.json" target="_blank">items.json</a> file and refresh the page
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary" onclick="copyToWhatsApp()">📋 Tempel ke WhatsApp</button>
+            <button class="btn btn-secondary" onclick="clearAll()">🗑️ Hapus Semua</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        let itemsData = null;
+
+        // Load items from JSON file
+        async function loadItems() {
+            try {
+                const response = await fetch('items.json');
+                if (!response.ok) throw new Error('Failed to load items.json');
+                itemsData = await response.json();
+                renderCategories();
+                document.getElementById('loading').style.display = 'none';
+            } catch (error) {
+                console.error('Error loading items:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        // Render categories and items
+        function renderCategories() {
+            const container = document.getElementById('categories-container');
+            container.innerHTML = '';
+
+            itemsData.categories.forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                
+                categoryDiv.innerHTML = `
+                    <div class="category-header">
+                        <span class="category-icon">${category.icon}</span>
+                        ${category.name}
+                    </div>
+                    <div class="items">
+                        ${category.items.map(item => renderItem(item, category.id)).join('')}
+                    </div>
+                `;
+                
+                container.appendChild(categoryDiv);
+            });
+
+            // Add event listeners
+            document.addEventListener('change', function(e) {
+                if (e.target.type === 'checkbox') {
+                    const item = e.target.closest('.item');
+                    if (e.target.checked) {
+                        item.classList.add('checked');
+                    } else {
+                        item.classList.remove('checked');
+                    }
+                    updateCounter();
+                }
+            });
+        }
+
+        // Render individual item
+        function renderItem(item, categoryId) {
+            const itemClass = item.hasSize ? 'item' : 'item no-size';
+            const sizeOptions = item.hasSize ? `
+                <div class="size-options">
+                    <label><input type="radio" name="${item.id}-size" value="Kecil"><span>Kecil</span></label>
+                    <label><input type="radio" name="${item.id}-size" value="Sedang"><span>Sedang</span></label>
+                    <label><input type="radio" name="${item.id}-size" value="Besar"><span>Besar</span></label>
+                </div>
+            ` : '';
+
+            const controls = item.hasSize ? `
+                <div class="item-controls">
+                    ${sizeOptions}
+                    <input type="number" class="quantity-input" placeholder="${item.unit}" min="1">
+                </div>
+            ` : '';
+
+            const quantityInput = item.hasSize ? '' : `<input type="number" class="quantity-input" placeholder="${item.unit}" min="1">`;
+
+            return `
+                <div class="${itemClass}">
+                    <div class="item-main">
+                        <input type="checkbox" id="${item.id}" data-name="${item.name}">
+                        <label for="${item.id}" class="item-name">${item.name}</label>
+                        ${quantityInput}
+                    </div>
+                    ${controls}
+                </div>
+            `;
+        }
+
+        function updateCounter() {
+            const checkedItems = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            document.getElementById('itemCount').textContent = `${checkedItems} item dipilih`;
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        function copyToWhatsApp() {
+            const checkedItems = document.querySelectorAll('input[type="checkbox"]:checked');
+            
+            if (checkedItems.length === 0) {
+                showToast('Pilih item terlebih dahulu!');
+                return;
+            }
+
+            let whatsappText = '*🛒 DAFTAR BELANJA*\n\n';
+            let currentCategory = '';
+            
+            checkedItems.forEach(checkbox => {
+                const item = checkbox.closest('.item');
+                const categoryHeader = checkbox.closest('.category').querySelector('.category-header').textContent.trim();
+                const itemName = checkbox.dataset.name;
+                const quantityInput = item.querySelector('.quantity-input');
+                const quantity = quantityInput.value || '1';
+                const unit = quantityInput.placeholder || 'pcs';
+                
+                // Check for size selection
+                const sizeOptions = item.querySelector('.size-options');
+                let sizeText = '';
+                if (sizeOptions) {
+                    const selectedSize = sizeOptions.querySelector('input[type="radio"]:checked');
+                    if (selectedSize) {
+                        sizeText = ` (${selectedSize.value})`;
+                    }
+                }
+                
+                if (currentCategory !== categoryHeader) {
+                    if (currentCategory !== '') whatsappText += '\n';
+                    whatsappText += `*${categoryHeader}*\n`;
+                    currentCategory = categoryHeader;
+                }
+                
+                whatsappText += `- ${itemName}${sizeText}: ${quantity} ${unit}\n`;
+            });
+            
+            // Add notes if any
+            const notesText = document.getElementById('additional-notes').value.trim();
+            if (notesText) {
+                whatsappText += `\n*📝 Tambahan/Notes:*\n${notesText}\n`;
+            }
+            
+            whatsappText += `\n_Total: ${checkedItems.length} item_`;
+            whatsappText += `\n_Dibuat: ${new Date().toLocaleDateString('id-ID')}_`;
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(whatsappText).then(() => {
+                showToast('✅ Berhasil dicopy! Paste di WhatsApp');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = whatsappText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showToast('✅ Berhasil dicopy! Paste di WhatsApp');
+            });
+        }
+
+        function clearAll() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const quantities = document.querySelectorAll('.quantity-input');
+            const radios = document.querySelectorAll('input[type="radio"]');
+            const notesField = document.getElementById('additional-notes');
+            
+            checkboxes.forEach(cb => {
+                cb.checked = false;
+                cb.closest('.item').classList.remove('checked');
+            });
+            
+            quantities.forEach(input => {
+                input.value = '';
+            });
+            
+            radios.forEach(radio => {
+                radio.checked = false;
+            });
+            
+            if (notesField) notesField.value = '';
+            
+            updateCounter();
+            showToast('🗑️ Semua item telah dihapus');
+        }
+
+        // Initialize app
+        loadItems();
+    </script>
+</body>
+</html>
