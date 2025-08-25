@@ -1,0 +1,280 @@
+{
+  "categories": [
+    {
+      "id": "peralatan-mandi",
+      "name": "Peralatan Mandi",
+      "icon": "🛁",
+      "items": [
+        {
+          "id": "shampo-sunsilk",
+          "name": "SUNSILK Shampo Mama",
+          "hasSize": true,
+          "unit": "pcs"
+        },
+        {
+          "id": "shampo-clear",
+          "name": "CLEAR Shampo Palu",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "sabun-giv",
+          "name": "GIV Sabun mandi",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "sabun-nuvo",
+          "name": "NUVO Sabun batang asisten 726GR",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "pasta-ciptadent",
+          "name": "CIPTADENT Pasta gigi asisten",
+          "hasSize": true,
+          "unit": "pcs"
+        },
+        {
+          "id": "pasta-enzim",
+          "name": "ENZIM Pasta gigi mama",
+          "hasSize": true,
+          "unit": "pcs"
+        },
+        {
+          "id": "pasta-closeup",
+          "name": "CLOSE UP Pasta Gigi Palu",
+          "hasSize": true,
+          "unit": "pcs"
+        },
+        {
+          "id": "sikat-gigi",
+          "name": "BAGUS Sikat gigi",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "nivea-deodorant",
+          "name": "NIVEA MEN Deodorant 50ML",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "sabun-biore",
+          "name": "BIORE/LUX Sabun mandi cair 800ML",
+          "hasSize": false,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "id": "pembersih-rumah",
+      "name": "Pembersih Rumah dan Baju",
+      "icon": "🧽",
+      "items": [
+        {
+          "id": "deterjen-soklin",
+          "name": "SO KLIN Deterjen 1.5KG",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "pewangi-soklin",
+          "name": "SO KLIN Pewangi",
+          "hasSize": true,
+          "unit": "pcs"
+        },
+        {
+          "id": "pewangi-lantai",
+          "name": "SO KLIN/WIPOL Pewangi Lantai 770ML",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "superkifa",
+          "name": "SUPERKIFA Bubuk Dahstor",
+          "hasSize": true,
+          "unit": "pcs"
+        },
+        {
+          "id": "pembersih-kaca",
+          "name": "CLING/WINDEX Pembersih kaca 400ML",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "harpic",
+          "name": "HARPIC Power Plus",
+          "hasSize": true,
+          "unit": "pcs"
+        },
+        {
+          "id": "baygon",
+          "name": "BAYGON Obat Nyamuk 600ML",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "nice-tisu",
+          "name": "NICE Tisu kering 1000GR",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "tisu-basah",
+          "name": "Tisu basah buy 1 get 1",
+          "hasSize": false,
+          "unit": "pak"
+        }
+      ]
+    },
+    {
+      "id": "keperluan-dapur",
+      "name": "Keperluan Dapur",
+      "icon": "🍳",
+      "items": [
+        {
+          "id": "minyak",
+          "name": "Minyak goreng 2000ML",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "gula",
+          "name": "GULAKU/GMP Gula 1KG",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "ajinomoto",
+          "name": "AJINOMOTO Penyedap rasa 1000GR",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "kecap",
+          "name": "BANGO Kecap",
+          "hasSize": true,
+          "unit": "pcs"
+        },
+        {
+          "id": "sambal",
+          "name": "2 BELIBIS Saus cabe 1KG",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "garam",
+          "name": "Garam yodium 1KG",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "royco",
+          "name": "ROYCO Penyedap rasa",
+          "hasSize": true,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "id": "minuman",
+      "name": "Minuman",
+      "icon": "☕",
+      "items": [
+        {
+          "id": "kapal-api",
+          "name": "KAPAL API Kopi mix 20 sachet",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "top-kopi",
+          "name": "TOP KOPI Kopi susu 10 sachet",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "energen",
+          "name": "ENERGEN Minuman instan 10-20 sachet",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "teh-sariwangi",
+          "name": "SARIWANGI Teh celup 50 sachet",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "lasegar",
+          "name": "LASEGAR Minuman kaleng 320ML",
+          "hasSize": false,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "id": "makanan-instan",
+      "name": "Makanan Instan",
+      "icon": "🍜",
+      "items": [
+        {
+          "id": "indomie-goreng",
+          "name": "INDOMIE Mie goreng",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "indomie-kuah",
+          "name": "INDOMIE Mie kuah",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "ayam-telor",
+          "name": "AYAM 2 TELOR Mie telor 200GR",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "aaa-bihun",
+          "name": "AAA Bihun 200GR",
+          "hasSize": false,
+          "unit": "pcs"
+        },
+        {
+          "id": "botan-sarden",
+          "name": "BOTAN Sarden 1550GR",
+          "hasSize": false,
+          "unit": "pcs"
+        }
+      ]
+    },
+    {
+      "id": "frozen-food",
+      "name": "Frozen Food",
+      "icon": "🥔",
+      "items": [
+        {
+          "id": "crinkle-cut",
+          "name": "CRINKLE CUT kentang curah per KG",
+          "hasSize": false,
+          "unit": "kg"
+        },
+        {
+          "id": "shoestring",
+          "name": "SHOESTRING kentang curah per KG",
+          "hasSize": false,
+          "unit": "kg"
+        },
+        {
+          "id": "baso",
+          "name": "BASO Kaki Naga Curah per KG",
+          "hasSize": false,
+          "unit": "kg"
+        }
+      ]
+    }
+  ]
+}
